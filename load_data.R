@@ -11,15 +11,15 @@ if(!file.exists(data_location)){
     }
     
     if(!file.exists(file_location)){
-        download.file(file_url,destfile=file_location,method="curl")
+        download.file(file_url,destfile=file_location)
     }
     
     unzip(file_location, "household_power_consumption.txt", exdir = "./data")   
 }
 
 #Load the dataset.
-raw_data <- read.table(data_location, header = T, sep = ";",
-                       colClasses=c("character", "character", "character", "character", "character", "character", "character", "character", "character"))
+raw_data <- read.table(data_location, header = T, sep = ";", na.strings='?',
+                       colClasses=c(rep('character', 2), rep('numeric', 7)))
 
 # Turn the date into date objects
 raw_data$Date <- as.Date(raw_data$Date, "%d/%m/%Y")
@@ -33,9 +33,9 @@ data_set <- raw_data[raw_data$Date >= start_date & raw_data$Date <= end_date, ]
 
 #Tidy up data
 data_set$Global_active_power <- as.numeric(data_set$Global_active_power)
-data_set$Sub_metering_1 <- as.numeric(data_set$Sub_metering_1)
-data_set$Sub_metering_2 <- as.numeric(data_set$Sub_metering_2)
-data_set$Sub_metering_3 <- as.numeric(data_set$Sub_metering_3)
-data_set$Global_reactive_power <- as.numeric(data_set$Global_reactive_power)
-data_set$Voltage <- as.numeric(data_set$Voltage)
+#data_set$Sub_metering_1 <- as.numeric(data_set$Sub_metering_1)
+#data_set$Sub_metering_2 <- as.numeric(data_set$Sub_metering_2)
+#data_set$Sub_metering_3 <- as.numeric(data_set$Sub_metering_3)
+#data_set$Global_reactive_power <- as.numeric(data_set$Global_reactive_power)
+#data_set$Voltage <- as.numeric(data_set$Voltage)
 data_set$date_time <- strptime(paste(format(data_set$Date, "%Y-%m-%d"), data_set$Time), "%Y-%m-%d %H:%M:%S")
