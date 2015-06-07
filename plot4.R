@@ -1,6 +1,6 @@
 source("load_data.R")
 
-png("plot4.png",  width = 480, height = 480, units = "px")
+png("plot4.png",  width = 480, height = 480, units = "px", bg='transparent')
 par(mfrow = c(2,2))
 plot(data_set$date_time, data_set$Global_active_power, type="l", xlab="", ylab="Global Active power (kilowatts)")
 plot(data_set$date_time, data_set$Voltage, type="l", xlab="datetime", ylab="Voltage")
