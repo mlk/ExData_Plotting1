@@ -1,4 +1,5 @@
 source("load_data.R")
+data_set <- load_data()
 
 png("plot4.png",  width = 480, height = 480, units = "px", bg='transparent')
 par(mfrow = c(2,2))

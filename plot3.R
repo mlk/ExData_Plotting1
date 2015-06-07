@@ -1,4 +1,5 @@
 source("load_data.R")
+data_set <- load_data()
 
 png("plot3.png",  width = 480, height = 480, units = "px", bg='transparent')
 plot(data_set$date_time, data_set$Sub_metering_1,  col="Black", type="l", 
